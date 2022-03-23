@@ -1,18 +1,18 @@
 const buys = [
   {
-    sku: 'a1_t_100',
+    sku: 'gp2203_t_50',
     value: 50,
   },
   {
-    sku: 'a1_t_200',
+    sku: 'gp2203_t_100',
     value: 100,
   },
   {
-    sku: 'a1_t_300',
+    sku: 'gp2203_t_150',
     value: 150,
   },
   {
-    sku: 'a1_t_400',
+    sku: 'gp2203_t_200',
     value: 200,
   },
 ];

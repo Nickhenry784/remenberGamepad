@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Text,
   ImageBackground,
-  TextInput,
   View,
   TouchableOpacity,
   Alert,
@@ -12,21 +11,14 @@ import { images } from 'assets/images';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { SizedBox } from 'sizedbox';
-import { makeSelectTurn, makeSelectIsShowShopping } from './selectors';
+import { makeSelectTurn } from './selectors';
 import { appStyle } from './style';
 import { decrementTurn, setShowShopping } from './actions';
+import GamePadInput from './GamePadInput';
+import defaultInputs from './data/inputs';
 
-const key = 'App';
-
-function GamePad({ dispatch, turn, isShowShopping }) {
-  const [inputTopButton, setInputTopButton] = useState('');
-  const [inputRightButton, setInputRightButton] = useState('');
-  const [inputLeftButton, setInputLeftButton] = useState('');
-  const [inputBottomButton, setInputBottomButton] = useState('');
-  const [inputGreenButton, setInputGreenButton] = useState('');
-  const [inputYellowButton, setInputYellowButton] = useState('');
-  const [inputRedButton, setInputRedButton] = useState('');
-  const [inputBlueButton, setInputBlueButton] = useState('');
+function GamePad({ dispatch, turn }) {
+  const [inputs, setInputs] = useState(defaultInputs);
   const [inputDisable, setInputDisable] = useState(true);
 
   const onSetShowShopping = () => {
@@ -42,16 +34,15 @@ function GamePad({ dispatch, turn, isShowShopping }) {
     }
   };
 
+  const onSetInput = (type, value) => {
+    const newInputs = { ...inputs };
+    newInputs[type] = value;
+    setInputs(newInputs);
+  };
+
   const onResetGamePad = () => {
+    setInputs(defaultInputs);
     setInputDisable(true);
-    setInputTopButton('');
-    setInputRightButton('');
-    setInputLeftButton('');
-    setInputBottomButton('');
-    setInputGreenButton('');
-    setInputYellowButton('');
-    setInputRedButton('');
-    setInputBlueButton('');
   };
 
   return (
@@ -59,62 +50,15 @@ function GamePad({ dispatch, turn, isShowShopping }) {
       <ImageBackground
         source={images.home.gamepad}
         style={appStyle.gamepadImage}>
-        <TextInput
-          style={appStyle.inputTopButton}
-          onChangeText={setInputTopButton}
-          editable={inputDisable}
-          maxLength={1}
-          value={String(inputTopButton)}
-        />
-        <TextInput
-          style={appStyle.inputRightButton}
-          onChangeText={setInputRightButton}
-          editable={inputDisable}
-          maxLength={1}
-          value={String(inputRightButton)}
-        />
-        <TextInput
-          style={appStyle.inputLeftButton}
-          onChangeText={setInputLeftButton}
-          editable={inputDisable}
-          maxLength={1}
-          value={String(inputLeftButton)}
-        />
-        <TextInput
-          style={appStyle.inputBottomButton}
-          onChangeText={setInputBottomButton}
-          editable={inputDisable}
-          maxLength={1}
-          value={String(inputBottomButton)}
-        />
-        <TextInput
-          style={appStyle.inputBlueButton}
-          onChangeText={setInputBlueButton}
-          editable={inputDisable}
-          maxLength={1}
-          value={String(inputBlueButton)}
-        />
-        <TextInput
-          style={appStyle.inputYellowButton}
-          onChangeText={setInputYellowButton}
-          editable={inputDisable}
-          maxLength={1}
-          value={String(inputYellowButton)}
-        />
-        <TextInput
-          style={appStyle.inputRedButton}
-          onChangeText={setInputRedButton}
-          editable={inputDisable}
-          maxLength={1}
-          value={String(inputRedButton)}
-        />
-        <TextInput
-          style={appStyle.inputGreenButton}
-          onChangeText={setInputGreenButton}
-          editable={inputDisable}
-          maxLength={1}
-          value={String(inputGreenButton)}
-        />
+        {Object.keys(inputs).map(inputKey => (
+          <GamePadInput
+            value={inputs[inputKey]}
+            type={inputKey}
+            key={inputKey}
+            inputDisable={inputDisable}
+            onSetInput={onSetInput}
+          />
+        ))}
       </ImageBackground>
       <SizedBox vertical={30} />
       <View style={appStyle.startResetView}>
@@ -150,12 +94,10 @@ function GamePad({ dispatch, turn, isShowShopping }) {
 GamePad.propTypes = {
   dispatch: PropTypes.func,
   turn: PropTypes.number,
-  isShowShopping: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   turn: makeSelectTurn(),
-  isShowShopping: makeSelectIsShowShopping(),
 });
 
 export default connect(mapStateToProps)(GamePad);
