@@ -102,7 +102,7 @@ function Payment() {
     </View>
   ) : (
     <>
-      {dataBuys.map((buy, buyKey) => (
+      {buys.map((buy, buyKey) => (
         <Button
           type="TURN"
           key={buyKey}
@@ -110,7 +110,7 @@ function Payment() {
           onClick={handleRequestBuy}
         />
       ))}
-      {dataSubs.map((sub, subKey) => (
+      {subs.map((sub, subKey) => (
         <Button type="SUB" key={subKey} item={sub} onClick={handleRequestSub} />
       ))}
     </>

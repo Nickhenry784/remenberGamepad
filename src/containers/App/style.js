@@ -1,196 +1,109 @@
 import { StyleSheet } from 'react-native';
 
+export const brokenButton = (x, y) =>
+  StyleSheet.create({
+    position: 'absolute',
+    top: x,
+    left: y,
+    width: 80,
+    height: 80,
+    backgroundColor: '#606060',
+  });
+
+export const brokenPlayImage = (x, y) =>
+  StyleSheet.create({
+    position: 'absolute',
+    top: x,
+    left: y,
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
+  });
+
 export const appStyle = StyleSheet.create({
-  turn: {
-    color: 'white',
+  appBar: {
+    flex: 0.1,
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+  },
+  turnView: {
+    width: 80,
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  turnImage: {
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',
+  },
+  backText: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: 'white',
+    paddingTop: 10,
     position: 'absolute',
-    top: '5%',
     left: '5%',
-    textShadowColor: 'rgba(0, 0, 0, 0.4)',
-    textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 10,
   },
-  shoppingButton: {
-    position: 'absolute',
-    top: '4%',
-    right: '4%',
+  turn: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
   },
-
-  shoppingImage: {
+  shopImage: {
+    width: 60,
+    height: 60,
+    marginTop: 15,
     resizeMode: 'contain',
-    width: 40,
-    height: 40,
   },
-  textBack: {
-    fontSize: 24,
-    color: 'white',
-    position: 'absolute',
-    top: '3%',
-    left: '3%',
-  },
-
-  textClock: {
-    position: 'relative',
-    top: 20,
-    fontSize: 120,
-    color: 'white',
-    fontWeight: '500',
-  },
-
-  clockStyle: {
-    width: 300,
-    height: 300,
-    flex: 0.52,
+  viewCenter: {
+    flex: 0.9,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
 
-  textStartButton: {
+  chooseOptionText: {
+    width: '70%',
     fontSize: 30,
     color: 'white',
     fontWeight: 'bold',
-    position: 'absolute',
-    top: '40%',
-    left: '35%',
-  },
-
-  startImage: {
-    width: 230,
-    height: 80,
-  },
-
-  viewCenter: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  gamepadImage: {
-    alignContent: 'center',
-    justifyContent: 'center',
-    width: 300,
-    height: 300,
-    resizeMode: 'contain',
-  },
-
-  inputTopButton: {
-    position: 'absolute',
-    top: '1%',
-    left: '18%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
-  },
-  inputLeftButton: {
-    position: 'absolute',
-    top: '45%',
-    left: '-10%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
-  },
-
-  inputRightButton: {
-    position: 'absolute',
-    bottom: '-12%',
-    left: '37%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
-  },
-  inputBottomButton: {
-    position: 'absolute',
-    bottom: '-17%',
-    left: '18%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
-  },
-  inputBlueButton: {
-    position: 'absolute',
-    top: '-17%',
-    right: '30%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
-  },
-  inputYellowButton: {
-    position: 'absolute',
-    top: '0%',
-    right: '16%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
-  },
-  inputRedButton: {
-    position: 'absolute',
-    top: '50%',
-    right: '-10%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
-  },
-  inputGreenButton: {
-    position: 'absolute',
-    bottom: '0%',
-    right: '23%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
-  },
-
-  startResetView: {
-    flex: 0.2,
-    width: '70%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 5,
-    justifyContent: 'space-between',
-  },
-  imageButton: {
-    width: 100,
-    height: 30,
-    resizeMode: 'contain',
-  },
-  textButton: {
-    fontSize: 20,
     textAlign: 'center',
+  },
+
+  phoneImage: {
+    width: 300,
+    height: 450,
+    resizeMode: 'contain',
+  },
+  playButton: {
+    position: 'absolute',
+    bottom: '10%',
+    left: '40%',
+  },
+  brokenImage: {
+    width: 80,
+    height: 80,
+    resizeMode: 'contain',
+  },
+  randomText: {
+    fontSize: 18,
+    paddingTop: 25,
     fontWeight: 'bold',
     color: 'white',
+    textAlign: 'center',
+  },
+  playImage: {
+    width: 80,
+    height: 80,
+    resizeMode: 'contain',
+  },
+  playView: {
+    width: '100%',
+    height: '100%',
   },
 });
 
@@ -259,18 +172,18 @@ export const buttonStyle = StyleSheet.create({
     padding: 5,
   },
   buttonText: {
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.20)',
     borderRadius: 2,
     marginBottom: 5,
     paddingVertical: 10,
     paddingHorizontal: 100,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: '#fff',
   },
   text: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   textSmall: {

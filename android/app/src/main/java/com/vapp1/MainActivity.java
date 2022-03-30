@@ -1,4 +1,4 @@
-package com.rmembersetgamepad;
+package com.cusbrokenstylle;
 
 import com.facebook.react.ReactActivity;
 

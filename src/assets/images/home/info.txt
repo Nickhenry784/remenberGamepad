@@ -1,0 +1,22 @@
+Name app: Customize phone broken style app
+Apkname: com.cusbrokenstylle
+
+
+
+
+Chin option manf vỡ để sử dụng, bấm play thì ra 1 màn hình đen, chạm vào đâu thì hiện ra hình ở vị trí đó
+
+1 lần play tốn 1 turn
+
+
+mặc định có 10 turn
+
+click vào nút bên phai de mua hang`
+
+
+
+turn : 50,100,150,200
+Price: 0.99,1.99,4.99,9.99
+
+Sub:200,500
+Price: 10$/week, 20$/tháng
