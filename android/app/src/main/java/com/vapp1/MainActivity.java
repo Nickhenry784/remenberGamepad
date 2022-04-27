@@ -1,4 +1,4 @@
-package com.ofeliabbaumbach.holeinpapersimula;
+package com.pollysanford.sendwishestometo;
 
 import com.facebook.react.ReactActivity;
 

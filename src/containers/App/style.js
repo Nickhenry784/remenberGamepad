@@ -66,9 +66,10 @@ export const appStyle = StyleSheet.create({
     left: '5%',
   },
   turn: {
-    fontSize: 20,
+    fontSize: 30,
+    marginLeft: 10,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
   },
   shopImage: {
     width: 60,
@@ -79,7 +80,8 @@ export const appStyle = StyleSheet.create({
   viewCenter: {
     flex: 0.9,
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
+    marginBottom: 20,
   },
 
   chooseOptionText: {
@@ -108,13 +110,32 @@ export const appStyle = StyleSheet.create({
     textAlign: 'center',
   },
   playImage: {
-    width: windowWidth * 0.3,
-    height: windowHeight * 0.2,
+    width: windowWidth * 0.2,
+    height: windowHeight * 0.1,
     resizeMode: 'contain',
   },
+  popupImage: {
+    width: windowWidth * 0.5,
+    height: windowWidth * 0.6,
+    resizeMode: 'stretch',
+  },
+  popupView: {
+    alignItems: 'center',
+  },
   playView: {
+    flex: 0.3,
+    marginTop: 60,
+    flexDirection: 'row',
+    paddingHorizontal: '20%',
     width: '100%',
-    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  input: {
+    paddingTop: windowHeight * 0.2,
+    fontSize: 20,
+    color: 'black',
+    fontWeight: 'bold',
   },
 });
 

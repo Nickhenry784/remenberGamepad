@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.ofeliabbaumbach.holeinpapersimula">
+  package="com.pollysanford.sendwishestometo">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
