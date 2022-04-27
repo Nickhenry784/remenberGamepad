@@ -1,10 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export const brokenButton = (x, y) =>
   StyleSheet.create({
-    position: 'absolute',
-    top: x,
-    left: y,
     width: 80,
     height: 80,
     backgroundColor: '#606060',
@@ -29,6 +29,22 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 10,
   },
+  brokenButton: {
+    width: windowWidth * 0.2,
+    height: windowWidth * 0.2,
+    margin: 10,
+    backgroundColor: 'white',
+    borderRadius: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: 'black',
+  },
+  listView: {
+    flex: 0.8,
+    backgroundColor: 'red',
+    width: '100%',
+    paddingHorizontal: '20%',
+  },
   turnView: {
     width: 80,
     height: 50,
@@ -44,7 +60,7 @@ export const appStyle = StyleSheet.create({
   backText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
     paddingTop: 10,
     position: 'absolute',
     left: '5%',
@@ -52,7 +68,7 @@ export const appStyle = StyleSheet.create({
   turn: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
   },
   shopImage: {
     width: 60,
@@ -69,7 +85,7 @@ export const appStyle = StyleSheet.create({
   chooseOptionText: {
     width: '70%',
     fontSize: 30,
-    color: 'white',
+    color: 'black',
     fontWeight: 'bold',
     textAlign: 'center',
   },
@@ -79,26 +95,21 @@ export const appStyle = StyleSheet.create({
     height: 450,
     resizeMode: 'contain',
   },
-  playButton: {
-    position: 'absolute',
-    bottom: '10%',
-    left: '40%',
-  },
   brokenImage: {
-    width: 80,
-    height: 80,
-    resizeMode: 'contain',
+    width: windowWidth * 0.15,
+    height: windowWidth * 0.15,
+    resizeMode: 'stretch',
   },
   randomText: {
     fontSize: 18,
     paddingTop: 25,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
   },
   playImage: {
-    width: 80,
-    height: 80,
+    width: windowWidth * 0.3,
+    height: windowHeight * 0.2,
     resizeMode: 'contain',
   },
   playView: {
@@ -167,7 +178,7 @@ export const buttonStyle = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
     padding: 5,
   },
@@ -177,17 +188,17 @@ export const buttonStyle = StyleSheet.create({
     marginBottom: 5,
     paddingVertical: 10,
     paddingHorizontal: 100,
-    borderWidth: 1,
-    borderColor: '#fff',
+    borderWidth: 3,
+    borderColor: 'black',
   },
   text: {
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
   },
   textSmall: {
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
     fontSize: 14,
   },

@@ -1,0 +1,23 @@
+Name app: Hole in paper simulator
+Apkname: com.holeinpapersimula
+
+
+
+Cho ng dùng chọn các option cho hole, nêu chọn ? thì lúc chơi sẽ random hole
+
+cách chơi thì chọn xong OK thì ra background rỗng, click vào đâu thì hiện hole ở đó
+
+
+
+1 lần play tốn 1 turn ( hình hole góc trái)
+
+
+
+
+Turn : 50,100,200,300
+Price: 0.99,1.99,4.99,9.99
+
+Sub:1000,3000
+Price: 10$/week, 20$/tháng
+
+

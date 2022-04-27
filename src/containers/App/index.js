@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, TouchableOpacity, Image, Alert } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Alert,
+  FlatList,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
@@ -23,6 +30,7 @@ function App({ dispatch, turn, isShowShopping }) {
   useInjectReducer({ key, reducer });
   const [indexBroken, setIndexBroken] = useState(-1);
   const [isPlay, setPlay] = useState(false);
+  const numCol = 2;
 
   const onSetShowShopping = () => {
     dispatch(setShowShopping(!isShowShopping));
@@ -47,11 +55,11 @@ function App({ dispatch, turn, isShowShopping }) {
   };
 
   const onClickItemBroken = index => {
+    if (index === 5) {
+      setIndexBroken(randomIntFromInterval(0, 4));
+      return false;
+    }
     setIndexBroken(index);
-  };
-
-  const onClickRandomButton = () => {
-    setIndexBroken(randomIntFromInterval(0, 4));
   };
 
   return isPlay ? (
@@ -72,7 +80,7 @@ function App({ dispatch, turn, isShowShopping }) {
           </TouchableOpacity>
         ) : (
           <View style={appStyle.turnView}>
-            <Image source={images.home.turn} style={appStyle.turnImage} />
+            <Image source={images.home.hole1} style={appStyle.turnImage} />
             <Text style={appStyle.turn}>{turn}</Text>
           </View>
         )}
@@ -80,7 +88,7 @@ function App({ dispatch, turn, isShowShopping }) {
           <TouchableOpacity
             onPress={onSetShowShopping}
             onLongPress={onSetShowShopping}>
-            <Image source={images.home.shop} style={appStyle.shopImage} />
+            <Image source={images.home.buy} style={appStyle.shopImage} />
           </TouchableOpacity>
         )}
       </View>
@@ -92,29 +100,25 @@ function App({ dispatch, turn, isShowShopping }) {
             <Text style={appStyle.chooseOptionText}>
               Choose your option and play
             </Text>
-            <Image source={images.home.phone} style={appStyle.phoneImage} />
-          </View>
-          {brokenData.map((broken, index) => (
+            <FlatList
+              data={brokenData}
+              numColumns={numCol}
+              scrollEnabled={false}
+              renderItem={({ item, index }) => (
+                <TouchableOpacity
+                  onPress={() => onClickItemBroken(index)}
+                  onLongPress={() => onClickItemBroken(index)}
+                  style={appStyle.brokenButton}>
+                  <Image source={item.image} style={appStyle.brokenImage} />
+                </TouchableOpacity>
+              )}
+            />
             <TouchableOpacity
-              key={broken.id}
-              onPress={() => onClickItemBroken(index)}
-              onLongPress={() => onClickItemBroken(index)}
-              style={brokenButton(broken.top, broken.left)}>
-              <Image source={broken.image} style={appStyle.brokenImage} />
+              onPress={onClickPlayButton}
+              onLongPress={onClickPlayButton}>
+              <Image source={images.home.ok} style={appStyle.playImage} />
             </TouchableOpacity>
-          ))}
-          <TouchableOpacity
-            onPress={onClickRandomButton}
-            onLongPress={onClickRandomButton}
-            style={brokenButton('70%', '60%')}>
-            <Text style={appStyle.randomText}>Random</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={onClickPlayButton}
-            onLongPress={onClickPlayButton}
-            style={appStyle.playButton}>
-            <Image source={images.home.play} style={appStyle.playImage} />
-          </TouchableOpacity>
+          </View>
         </>
       )}
     </Layout>

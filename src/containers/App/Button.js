@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { buttonStyle } from './style';
 import dataBuys from './data/buys';
-import dataSubs from './data/subs';
 
 function Button({ type, item, onClick }) {
   const onPressButton = () => {

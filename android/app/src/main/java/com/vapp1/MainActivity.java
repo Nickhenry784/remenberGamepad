@@ -1,4 +1,4 @@
-package com.cusbrokenstylle;
+package com.ofeliabbaumbach.holeinpapersimula;
 
 import com.facebook.react.ReactActivity;
 
