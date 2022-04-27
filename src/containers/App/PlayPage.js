@@ -1,49 +1,74 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Text, Image, View, TouchableOpacity, Alert } from 'react-native';
+import {
+  Text,
+  Image,
+  View,
+  TouchableOpacity,
+  Animated,
+  Dimensions,
+} from 'react-native';
 import { images } from 'assets/images';
 import { connect } from 'react-redux';
-import { appStyle, brokenPlayImage } from './style';
-import { brokenData } from './data/broken';
+import { appStyle, layoutStyle } from './style';
 
-function PlayPage({ dispatch, index, onClickBackButton }) {
-  const [positionImage, setPositionImage] = useState([]);
-  const [clickState, setClickState] = useState(false);
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
-  const handlePress = evt => {
-    setClickState(true);
-    const list = [...positionImage];
-    list.push({
-      top: evt.nativeEvent.locationY,
-      left: evt.nativeEvent.locationX,
-    });
-    setPositionImage(list);
-  };
+function PlayPage({ onClickBackButton }) {
+  const [score, setScore] = useState(0);
+  const [right, setRight] = useState(0);
+  const [topPos, setTopPos] = useState(windowHeight * 0.8);
+
+  useEffect(() => {
+    const timeLife = setTimeout(() => {
+      if (right !== 100) {
+        setRight(right + 10);
+      }
+      if (right === 30) {
+        setTopPos(windowHeight * 0.75);
+        setScore(score + 1);
+      }
+      if (right === 40) {
+        setTopPos(windowHeight * 0.8);
+      }
+      if (right === 100) {
+        setRight(-10);
+      }
+    }, 1000);
+    return () => {
+      clearTimeout(timeLife);
+    };
+  }, [right]);
 
   return (
-    <TouchableOpacity
-      onPress={evt => handlePress(evt)}
-      style={appStyle.playView}>
-      <TouchableOpacity
-        onPress={onClickBackButton}
-        onLongPress={onClickBackButton}>
-        <Text style={appStyle.backText}>Back</Text>
-      </TouchableOpacity>
-      {clickState &&
-        positionImage.map((item, indexBrroken) => (
-          <Image
-            key={indexBrroken}
-            source={brokenData[index].image}
-            style={brokenPlayImage(item.top, item.left)}
-          />
-        ))}
-    </TouchableOpacity>
+    <>
+      <Image source={images.home.background} style={layoutStyle.background} />
+      <View style={appStyle.playView}>
+        <Text style={appStyle.scoreText}>{score}</Text>
+        <TouchableOpacity
+          onPress={onClickBackButton}
+          onLongPress={onClickBackButton}>
+          <Image source={images.home.exit} style={appStyle.playImage} />
+        </TouchableOpacity>
+        <Animated.Image
+          source={images.home.sheep}
+          style={[
+            {
+              position: 'absolute',
+              top: topPos,
+              right: `${right} %`,
+              width: windowWidth * 0.1,
+              height: windowHeight * 0.06,
+            },
+          ]}
+        />
+      </View>
+    </>
   );
 }
 
 PlayPage.propTypes = {
-  dispatch: PropTypes.func,
-  index: PropTypes.number,
   onClickBackButton: PropTypes.func,
 };
 

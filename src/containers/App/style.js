@@ -21,33 +21,10 @@ export const brokenPlayImage = (x, y) =>
   });
 
 export const appStyle = StyleSheet.create({
-  appBar: {
-    flex: 0.1,
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-  },
-  brokenButton: {
-    width: windowWidth * 0.2,
-    height: windowWidth * 0.2,
-    margin: 10,
-    backgroundColor: 'white',
-    borderRadius: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderColor: 'black',
-  },
-  listView: {
-    flex: 0.8,
-    backgroundColor: 'red',
-    width: '100%',
-    paddingHorizontal: '20%',
-  },
   turnView: {
-    width: 80,
-    height: 50,
+    width: windowWidth * 0.2,
+    height: windowHeight * 0.1,
+    paddingLeft: windowWidth * 0.05,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -72,30 +49,14 @@ export const appStyle = StyleSheet.create({
     color: 'white',
   },
   shopImage: {
-    width: 60,
-    height: 60,
-    marginTop: 15,
+    width: windowWidth * 0.1,
+    height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
   viewCenter: {
     flex: 0.9,
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    marginBottom: 20,
-  },
-
-  chooseOptionText: {
-    width: '70%',
-    fontSize: 30,
-    color: 'black',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-
-  phoneImage: {
-    width: 300,
-    height: 450,
-    resizeMode: 'contain',
+    justifyContent: 'center',
   },
   brokenImage: {
     width: windowWidth * 0.15,
@@ -110,32 +71,24 @@ export const appStyle = StyleSheet.create({
     textAlign: 'center',
   },
   playImage: {
-    width: windowWidth * 0.2,
-    height: windowHeight * 0.1,
+    width: windowWidth * 0.4,
+    height: windowHeight * 0.3,
     resizeMode: 'contain',
   },
-  popupImage: {
-    width: windowWidth * 0.5,
-    height: windowWidth * 0.6,
-    resizeMode: 'stretch',
-  },
-  popupView: {
-    alignItems: 'center',
+  scoreText: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: 'white',
   },
   playView: {
-    flex: 0.3,
-    marginTop: 60,
-    flexDirection: 'row',
-    paddingHorizontal: '20%',
+    position: 'absolute',
     width: '100%',
+    height: '100%',
+    paddingVertical: 20,
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  input: {
-    paddingTop: windowHeight * 0.2,
-    fontSize: 20,
-    color: 'black',
-    fontWeight: 'bold',
+    zIndex: 3,
+    elevation: 3,
   },
 });
 
@@ -156,9 +109,9 @@ export const musicsStyle = StyleSheet.create({
 
 export const layoutStyle = StyleSheet.create({
   background: {
-    resizeMode: 'contain',
-    width: '100%',
-    height: '100%',
+    resizeMode: 'stretch',
+    width: windowWidth,
+    height: windowHeight,
   },
   land: {
     resizeMode: 'cover',
@@ -204,18 +157,20 @@ export const buttonStyle = StyleSheet.create({
     padding: 5,
   },
   buttonText: {
-    backgroundColor: 'rgba(0,0,0,0.20)',
-    borderRadius: 2,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    width: windowWidth * 0.7,
+    height: windowHeight * 0.1,
     marginBottom: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 100,
     borderWidth: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
     borderColor: 'black',
   },
   text: {
     color: 'black',
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   textSmall: {

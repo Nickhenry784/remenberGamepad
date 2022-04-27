@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.pollysanford.sendwishestometo",
+    package = "com.ladariusrobel.sheepjumpslator",
 )
 
 android_resource(
     name = "res",
-    package = "com.pollysanford.sendwishestometo",
+    package = "com.ladariusrobel.sheepjumpslator",
     res = "src/main/res",
 )
 

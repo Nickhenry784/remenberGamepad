@@ -1,4 +1,4 @@
-package com.pollysanford.sendwishestometo;
+package com.ladariusrobel.sheepjumpslator;
 
 import com.facebook.react.ReactActivity;
 
