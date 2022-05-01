@@ -9,22 +9,22 @@ function Button({ type, item, onClick }) {
     onClick(item.sku);
   };
 
-  return item?.value ? (
+  return (
     <View style={buttonStyle.button}>
       <View style={buttonStyle.buttonText}>
         <TouchableOpacity onPress={onPressButton} onLongPress={onPressButton}>
           <>
-            <Text style={buttonStyle.text}>{`${item?.value} ${type}`}</Text>
-            <Text style={buttonStyle.textSmall}>{item?.localizedPrice}</Text>
+            <Text style={buttonStyle.text}>{item.description}</Text>
+            <Text style={buttonStyle.textSmall}>{item.localizedPrice}</Text>
           </>
         </TouchableOpacity>
       </View>
     </View>
-  ) : null;
+  );
 }
 
 Button.propTypes = {
-  type: PropTypes.oneOf(['TURN', 'SUB']),
+  type: PropTypes.oneOf(['TURN']),
   item: PropTypes.object,
   onClick: PropTypes.func,
 };
