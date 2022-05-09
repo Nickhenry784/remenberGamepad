@@ -1,23 +1,33 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { View, Alert, ActivityIndicator } from 'react-native';
-import { useDispatch } from 'react-redux';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Alert,
+  ActivityIndicator,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+
 import RNIap, {
   purchaseUpdatedListener,
   finishTransaction,
 } from 'react-native-iap';
-import dataBuys from './data/buys';
+import { useDispatch } from 'react-redux';
 import { incrementTurn } from './actions';
-import Button from './Button';
-import { paymentStyle } from './style';
+import items from './data/buys';
 
 let purchaseUpdateSubscription = null;
 const purchaseErrorSubscription = null;
 
-function Payment() {
-  const dispatch = useDispatch();
-  const [buys, setBuys] = useState([]);
+export default function Buy() {
+  // const [products, setProducts] = useState(fakeProducts);
+  // const [isLoading, setIsLoading] = useState(false);
+
+  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const dispatch = useDispatch();
 
   const initialIAP = useCallback(async () => {
     try {
@@ -37,9 +47,9 @@ function Payment() {
         }
       });
 
-      const ps = await RNIap.getProducts(dataBuys.map(item => item.sku));
+      const res = await RNIap.getProducts(items.map(item => item.sku));
 
-      setBuys(ps);
+      setProducts(res);
     } catch (err) {
       Alert.alert(err.message);
       // console.warn(err.code, err.message);
@@ -62,17 +72,17 @@ function Payment() {
 
   const handleCompletePurchase = productId => {
     switch (productId) {
-      case dataBuys[0].sku:
-        dispatch(incrementTurn(dataBuys[0].value));
+      case items[0].sku:
+        dispatch(incrementTurn(items[0].value));
         break;
-      case dataBuys[1].sku:
-        dispatch(incrementTurn(dataBuys[1].value));
+      case items[1].sku:
+        dispatch(incrementTurn(items[1].value));
         break;
-      case dataBuys[2].sku:
-        dispatch(incrementTurn(dataBuys[2].value));
+      case items[2].sku:
+        dispatch(incrementTurn(items[2].value));
         break;
-      case dataBuys[3].sku:
-        dispatch(incrementTurn(dataBuys[3].value));
+      case items[3].sku:
+        dispatch(incrementTurn(items[3].value));
         break;
       default:
         break;
@@ -83,28 +93,123 @@ function Payment() {
     RNIap.requestPurchase(productId);
   };
 
-  const handleRequestSub = productId => {
-    RNIap.requestSubscription(productId);
-  };
-
-  return isLoading ? (
-    <View style={paymentStyle.center}>
-      <ActivityIndicator size="small" />
-    </View>
-  ) : (
-    <>
-      {buys.map((buy, buyKey) => (
-        <Button
-          type="TURN"
-          key={buyKey}
-          item={buy}
-          onClick={handleRequestBuy}
-        />
-      ))}
-    </>
+  return (
+    <ScrollView
+      style={styles.bg}
+      contentContainerStyle={{
+        paddingHorizontal: 20,
+        marginTop: 200,
+      }}>
+      {isLoading ? (
+        <ActivityIndicator size="small" />
+      ) : (
+        <>
+          <View style={styles.itemList3}>
+            {products.map((product, index) => (
+              <View style={styles.item3} key={product.productId}>
+                <TouchableOpacity
+                  onPress={() => handleRequestBuy(product.productId)}
+                  style={styles.item3Content}>
+                  <Text style={styles.price}>{product.localizedPrice}</Text>
+                  <Text style={styles.descr}>{product.description}</Text>
+                </TouchableOpacity>
+              </View>
+            ))}
+          </View>
+        </>
+      )}
+    </ScrollView>
   );
 }
 
-Payment.propTypes = {};
-
-export default Payment;
+const styles = StyleSheet.create({
+  bg: {
+    marginTop: 80,
+    width: '100%',
+    height: '100%',
+  },
+  items: {
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  },
+  itemsSubs: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  item: {
+    margin: 5,
+    width: 150,
+    height: 150,
+    backgroundColor: '#fff',
+    elevation: 1,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  itemSub: {
+    margin: 5,
+    width: 150,
+    paddingVertical: 10,
+    backgroundColor: '#fff',
+    elevation: 1,
+    borderRadius: 10,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  d: {
+    width: 30,
+    height: 20,
+    marginRight: 5,
+  },
+  price: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: '#212121',
+  },
+  descr: {
+    fontSize: 14,
+    color: '#212121',
+    fontWeight: '500',
+  },
+  itemList: {},
+  item2: {
+    backgroundColor: '#fff',
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderRadius: 3,
+    elevation: 2,
+    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  item2Body: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  itemList3: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginHorizontal: -5,
+  },
+  item3: {
+    width: '50%',
+    padding: 5,
+  },
+  item3Content: {
+    backgroundColor: '#fff',
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderRadius: 3,
+    borderColor: 'black',
+    elevation: 2,
+    marginBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+});

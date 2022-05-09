@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Text,
@@ -13,17 +13,19 @@ import { createStructuredSelector } from 'reselect';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { images } from 'assets/images';
 import { randomIntFromInterval } from 'utils/number';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { makeSelectIsShowShopping, makeSelectTurn } from './selectors';
-import { appStyle, brokenButton } from './style';
+import { appStyle } from './style';
 import saga from './saga';
 import reducer from './reducer';
 import Layout from './Layout';
-import Buttons from './Buttons';
+import Payment from './Payment';
 import { brokenData } from './data/broken';
-import { setShowShopping, decrementTurn } from './actions';
+import { setShowShopping, decrementTurn, setTurn } from './actions';
 import PlayPage from './PlayPage';
 
 const key = 'App';
+const STORAGE_TURN = '@turn';
 
 function App({ dispatch, turn, isShowShopping }) {
   useInjectSaga({ key, saga });
@@ -31,6 +33,27 @@ function App({ dispatch, turn, isShowShopping }) {
   const [indexBroken, setIndexBroken] = useState(-1);
   const [isPlay, setPlay] = useState(false);
   const numCol = 2;
+
+  const readData = async () => {
+    try {
+      const value = await AsyncStorage.getItem(STORAGE_TURN);
+      console.log(value);
+
+      if (value === null) {
+        dispatch(setTurn(10));
+      }
+
+      if (value !== null) {
+        dispatch(setTurn(value));
+      }
+    } catch (e) {
+      alert('Failed to fetch the input from storage');
+    }
+  };
+
+  useEffect(() => {
+    readData();
+  }, []);
 
   const onSetShowShopping = () => {
     dispatch(setShowShopping(!isShowShopping));
@@ -63,12 +86,10 @@ function App({ dispatch, turn, isShowShopping }) {
   };
 
   return isPlay ? (
-    <Layout turn={turn}>
-      <PlayPage
-        index={indexBroken}
-        onClickBackButton={handleClickBackButtonPlay}
-      />
-    </Layout>
+    <PlayPage
+      index={indexBroken}
+      onClickBackButton={handleClickBackButtonPlay}
+    />
   ) : (
     <Layout turn={turn}>
       <View style={appStyle.appBar}>
@@ -76,7 +97,7 @@ function App({ dispatch, turn, isShowShopping }) {
           <TouchableOpacity
             onPress={onSetShowShopping}
             onLongPress={onSetShowShopping}>
-            <Text style={appStyle.turn}>Back</Text>
+            <Text style={appStyle.back}>Back</Text>
           </TouchableOpacity>
         ) : (
           <View style={appStyle.turnView}>
@@ -93,7 +114,7 @@ function App({ dispatch, turn, isShowShopping }) {
         )}
       </View>
       {isShowShopping ? (
-        <Buttons />
+        <Payment />
       ) : (
         <>
           <View style={appStyle.viewCenter}>
@@ -127,7 +148,7 @@ function App({ dispatch, turn, isShowShopping }) {
 
 App.propTypes = {
   dispatch: PropTypes.func,
-  turn: PropTypes.number,
+  turn: PropTypes.any,
   isShowShopping: PropTypes.bool,
 };
 
